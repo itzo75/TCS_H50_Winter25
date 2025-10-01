@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Trainingsplan H50 TCS</title>
+<style>
+
+:root{
+  --fs-base: clamp(12px, 3.2vw, 16px);
+  --fs-small: clamp(11px, 2.8vw, 14px);
+  --zoom: 1;
+  --bg: #ffffff;
+  --ink: #222;
+  --muted: #666;
+  --title-bg: #e5e7eb; /* grey header for column titles */
+  --title-ink: #111;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{font-family:Segoe UI,Arial,sans-serif;margin:18px;color:var(--ink);background:var(--bg);font-size:calc(var(--fs-base) * var(--zoom));}
+.page-title{margin:0 0 6px}
+.toolbar{position:sticky;top:0;z-index:1000;background:var(--bg);padding:6px 0 8px;display:flex;justify-content:flex-end;gap:8px;border-bottom:1px solid #eee}
+.toolbar button{appearance:none;border:1px solid #ccc;background:#fafafa;border-radius:6px;padding:6px 10px;font:inherit;cursor:pointer}
+.toolbar button:hover{background:#f0f0f0}
+.toolbar button:active{transform:translateY(1px)}
+.small{font-size:calc(var(--fs-small) * var(--zoom));}
+
+.card{border:1px solid #ddd;border-radius:10px;margin:12px 0;overflow:hidden;background:#fff}
+.card-header{background:#f6f6f6;padding:10px 12px;cursor:pointer;display:flex;align-items:center;justify-content:space-between}
+.card-header .date{font-weight:600}
+.chev{transition:transform .2s ease}
+.card-content{display:none;padding:12px}
+.card.open .card-content{display:block}
+.card.open .chev{transform:rotate(90deg)}
+
+.columns{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.col{border:1px solid #eee;border-radius:8px;padding:8px;background:#fff}
+.col-title{background:var(--title-bg);color:var(--title-ink);padding:6px 8px;border-radius:6px;font-weight:600;margin-bottom:6px}
+.names{list-style:none;margin:0;padding-left:0}
+.name-row{padding:2px 0;border-bottom:1px dashed #e6e6e6}
+.name-row:last-child{border-bottom:none}
+
+@media (max-width: 500px){
+  .columns{grid-template-columns:repeat(3,1fr);gap:6px}
+  .col{padding:6px}
+  .card-header{padding:8px 10px}
+}
+
+</style>
+</head>
+<body>
+<div aria-label="Schriftgröße" class="toolbar small" role="toolbar">
+<button aria-label="Schrift verkleinern" onclick="zoomOut()" type="button">A−</button>
+<button aria-label="Schrift zurücksetzen" onclick="zoomReset()" type="button">A</button>
+<button aria-label="Schrift vergrößern" onclick="zoomIn()" type="button">A+</button>
+<span class="small" id="zoomReadout" style="margin-left:8px;color:var(--muted)">100%</span>
+</div>
+<h1 class="page-title">Trainingsplan H50 TCS</h1>
+<div class="card">
+<div class="card-header" onclick="toggleCard(this)"><span class="date" data-ymd="2025-10-01">01-Okt-2025</span><span class="chev">▶</span></div>
+<div class="card-content">
+<div class="columns">
+<div class="col">
+<div class="col-title">Doppel 1 (19-21h)</div>
+<ul class="names">
+<li class="name-row">Stefan</li>
+<li class="name-row">NDR</li>
+<li class="name-row">Simon</li>
+<li class="name-row">Jürgen</li>
+</ul>
+</div>
+<div class="col">
+<div class="col-title">Doppel 2 (19-21h)</div>
+<ul class="names">
+<li class="name-row">Dirk</li>
+<li class="name-row">Hristo</li>
+<li class="name-row">Holger D.</li>
+<li class="name-row">Holger E.</li>
+</ul>
+</div>
+<div class="col">
+<div class="col-title">Einzel (20-21h)</div>
+<ul class="names">
+<li class="name-row">Markus</li>
+<li class="name-row">Serkan</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="card">
+<div class="card-header" onclick="toggleCard(this)"><span class="date" data-ymd="2025-10-08">08-Okt-2025</span><span class="chev">▶</span></div>
+<div class="card-content">
+<div class="columns">
+<div class="col">
+<div class="col-title">Doppel 1 (19-21h)</div>
+<ul class="names">
+<li class="name-row">Stefan</li>
+<li class="name-row">Hristo</li>
+<li class="name-row">Markus</li>
+<li class="name-row">Frank</li>
+</ul>
+</div>
+<div class="col">
+<div class="col-title">Doppel 2 (19-21h)</div>
+<ul class="names">
+<li class="name-row">Simon</li>
+<li class="name-row">Jürgen</li>
+<li class="name-row">Holger E.</li>
+<li class="name-row">Adnan</li>
+</ul>
+</div>
+<div class="col">
+<div class="col-title">Einzel (20-21h)</div>
+<ul class="names">
+<li class="name-row">Dirk</li>
+<li class="name-row">Serkan</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="card">
+<div class="card-header" onclick="toggleCard(this)"><span class="date" data-ymd="2025-10-15">15-Okt-2025</span><span class="chev">▶</span></div>
+<div class="card-content">
+<div class="columns">
+<div class="col">
+<div class="col-title">Doppel 1 (19-21h)</div>
+<ul class="names">
+<li class="name-row">Stefan</li>
+<li class="name-row">Hristo</li>
+<li class="name-row">Frank</li>
+<li class="name-row">Jürgen</li>
+</ul>
+</div>
+<div class="col">
+<div class="col-title">Doppel 2 (19-21h)</div>
+<ul class="names">
+<li class="name-row">Dirk</li>
+<li class="name-row">Ernst</li>
+<li class="name-row">NDR</li>
+<li class="name-row">Markus</li>
+</ul>
+</div>
+<div class="col">
+<div class="col-title">Einzel (20-21h)</div>
+<ul class="names">
+<li class="name-row">Holger E.</li>
+<li class="name-row">Serkan</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="card">
+<div class="card-header" onclick="toggleCard(this)"><span class="date" data-ymd="2025-10-22">22-Okt-2025</span><span class="chev">▶</span></div>
+<div class="card-content">
+<div class="columns">
+<div class="col">
+<div class="col-title">Doppel 1 (19-21h)</div>
+<ul class="names">
+<li class="name-row">Stefan</li>
+<li class="name-row">Frank</li>
+<li class="name-row">Markus</li>
+<li class="name-row">Ernst</li>
+</ul>
+</div>
+<div class="col">
+<div class="col-title">Doppel 2 (19-21h)</div>
+<ul class="names">
+<li class="name-row">Dirk</li>
+<li class="name-row">Simon</li>
+<li class="name-row">Holger E.</li>
+<li class="name-row">Adnan</li>
+</ul>
+</div>
+<div class="col">
+<div class="col-title">Einzel (20-21h)</div>
+<ul class="names">
+<li class="name-row">NDR</li>
+<li class="name-row">Hristo</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="card">
+<div class="card-header" onclick="toggleCard(this)"><span class="date" data-ymd="2025-10-29">29-Okt-2025</span><span class="chev">▶</span></div>
+<div class="card-content">
+<div class="columns">
+<div class="col">
+<div class="col-title">Doppel 1 (19-21h)</div>
+<ul class="names">
+<li class="name-row">Hristo</li>
+<li class="name-row">Markus</li>
+<li class="name-row">Frank</li>
+<li class="name-row">Jürgen</li>
+</ul>
+</div>
+<div class="col">
+<div class="col-title">Doppel 2 (19-21h)</div>
+<ul class="names">
+<li class="name-row">Dirk</li>
+<li class="name-row">NDR</li>
+<li class="name-row">Holger E.</li>
+<li class="name-row">Simon</li>
+</ul>
+</div>
+<div class="col">
+<div class="col-title">Einzel (20-21h)</div>
+<ul class="names">
+<li class="name-row">Ernst</li>
+<li class="name-row">Serkan</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="card">
+<div class="card-header" onclick="toggleCard(this)"><span class="date" data-ymd="2025-11-05">05-Nov-2025</span><span class="chev">▶</span></div>
+<div class="card-content">
+<div class="columns">
+<div class="col">
+<div class="col-title">Doppel 1 (19-21h)</div>
+<ul class="names">
+<li class="name-row">Dieter</li>
+<li class="name-row">Frank</li>
+<li class="name-row">Holger D.</li>
+<li class="name-row">NDR</li>
+</ul>
+</div>
+<div class="col">
+<div class="col-title">Doppel 2 (19-21h)</div>
+<ul class="names">
+<li class="name-row">Niko</li>
+<li class="name-row">Stefan</li>
+<li class="name-row">Simon</li>
+<li class="name-row">Adnan</li>
+</ul>
+</div>
+<div class="col">
+<div class="col-title">Einzel (20-21h)</div>
+<ul class="names">
+<li class="name-row">Serkan</li>
+<li class="name-row">Jürgen</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="card">
+<div class="card-header" onclick="toggleCard(this)"><span class="date" data-ymd="2025-11-12">12-Nov-2025</span><span class="chev">▶</span></div>
+<div class="card-content">
+<div class="columns">
+<div class="col">
+<div class="col-title">Doppel 1 (19-21h)</div>
+<ul class="names">
+<li class="name-row">Hristo</li>
+<li class="name-row">Markus</li>
+<li class="name-row">Stefan</li>
+<li class="name-row">NDR</li>
+</ul>
+</div>
+<div class="col">
+<div class="col-title">Doppel 2 (19-21h)</div>
+<ul class="names">
+<li class="name-row">Dirk</li>
+<li class="name-row">Ernst</li>
+<li class="name-row">Simon</li>
+<li class="name-row">Holger E.</li>
+</ul>
+</div>
+<div class="col">
+<div class="col-title">Einzel (20-21h)</div>
+<ul class="names">
+<li class="name-row">Frank</li>
+<li class="name-row">Serkan</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="card">
+<div class="card-header" onclick="toggleCard(this)"><span class="date" data-ymd="2025-11-19">19-Nov-2025</span><span class="chev">▶</span></div>
+<div class="card-content">
+<div class="columns">
+<div class="col">
+<div class="col-title">Doppel 1 (19-21h)</div>
+<ul class="names">
+<li class="name-row">Stefan</li>
+<li class="name-row">Hristo</li>
+<li class="name-row">Frank</li>
+<li class="name-row">Jürgen</li>
+</ul>
+</div>
+<div class="col">
+<div class="col-title">Doppel 2 (19-21h)</div>
+<ul class="names">
+<li class="name-row">NDR</li>
+<li class="name-row">Holger E.</li>
+<li class="name-row">Niko</li>
+<li class="name-row">Adnan</li>
+</ul>
+</div>
+<div class="col">
+<div class="col-title">Einzel (20-21h)</div>
+<ul class="names">
+<li class="name-row">Markus</li>
+<li class="name-row">Simon</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="card">
+<div class="card-header" onclick="toggleCard(this)"><span class="date" data-ymd="2025-11-26">26-Nov-2025</span><span class="chev">▶</span></div>
+<div class="card-content">
+<div class="columns">
+<div class="col">
+<div class="col-title">Doppel 1 (19-21h)</div>
+<ul class="names">
+<li class="name-row">Dieter</li>
+<li class="name-row">Hristo</li>
+<li class="name-row">Holger D.</li>
+<li class="name-row">Frank</li>
+</ul>
+</div>
+<div class="col">
+<div class="col-title">Doppel 2 (19-21h)</div>
+<ul class="names">
+<li class="name-row">Dirk</li>
+<li class="name-row">Simon</li>
+<li class="name-row">Niko</li>
+<li class="name-row">Ernst</li>
+</ul>
+</div>
+<div class="col">
+<div class="col-title">Einzel (20-21h)</div>
+<ul class="names">
+<li class="name-row">Jürgen</li>
+<li class="name-row">Serkan</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="card">
+<div class="card-header" onclick="toggleCard(this)"><span class="date" data-ymd="2025-12-03">03-Dez-2025</span><span class="chev">▶</span></div>
+<div class="card-content">
+<div class="columns">
+<div class="col">
+<div class="col-title">Doppel 1 (19-21h)</div>
+<ul class="names">
+<li class="name-row">Stefan</li>
+<li class="name-row">Markus</li>
+<li class="name-row">Frank</li>
+<li class="name-row">Jürgen</li>
+</ul>
+</div>
+<div class="col">
+<div class="col-title">Doppel 2 (19-21h)</div>
+<ul class="names">
+<li class="name-row">Dirk</li>
+<li class="name-row">Niko</li>
+<li class="name-row">Simon</li>
+<li class="name-row">Adnan</li>
+</ul>
+</div>
+<div class="col">
+<div class="col-title">Einzel (20-21h)</div>
+<ul class="names">
+<li class="name-row">Dieter</li>
+<li class="name-row">Holger E.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="card">
+<div class="card-header" onclick="toggleCard(this)"><span class="date" data-ymd="2025-12-10">10-Dez-2025</span><span class="chev">▶</span></div>
+<div class="card-content">
+<div class="columns">
+<div class="col">
+<div class="col-title">Doppel 1 (19-21h)</div>
+<ul class="names">
+<li class="name-row">Stefan</li>
+<li class="name-row">Markus</li>
+<li class="name-row">Frank</li>
+<li class="name-row">Jürgen</li>
+</ul>
+</div>
+<div class="col">
+<div class="col-title">Doppel 2 (19-21h)</div>
+<ul class="names">
+<li class="name-row">Holger E.</li>
+<li class="name-row">NDR</li>
+<li class="name-row">Ernst</li>
+<li class="name-row">Simon</li>
+</ul>
+</div>
+<div class="col">
+<div class="col-title">Einzel (20-21h)</div>
+<ul class="names">
+<li class="name-row">Dirk</li>
+<li class="name-row">Serkan</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="card">
+<div class="card-header" onclick="toggleCard(this)"><span class="date" data-ymd="2025-12-17">17-Dez-2025</span><span class="chev">▶</span></div>
+<div class="card-content">
+<div class="columns">
+<div class="col">
+<div class="col-title">Doppel 1 (19-21h)</div>
+<ul class="names">
+<li class="name-row">Hristo</li>
+<li class="name-row">NDR</li>
+<li class="name-row">Jürgen</li>
+<li class="name-row">Dieter</li>
+</ul>
+</div>
+<div class="col">
+<div class="col-title">Doppel 2 (19-21h)</div>
+<ul class="names">
+<li class="name-row">Holger E.</li>
+<li class="name-row">Niko</li>
+<li class="name-row">Dirk</li>
+<li class="name-row">Adnan</li>
+</ul>
+</div>
+<div class="col">
+<div class="col-title">Einzel (20-21h)</div>
+<ul class="names">
+<li class="name-row">Stefan</li>
+<li class="name-row">Serkan</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="card">
+<div class="card-header" onclick="toggleCard(this)"><span class="date" data-ymd="2025-12-24">24-Dez-2025</span><span class="chev">▶</span></div>
+<div class="card-content">
+<div class="columns">
+<div class="col">
+<div class="col-title">Doppel 1 (19-21h)</div>
+<ul class="names">
+<li class="name-row">Stefan</li>
+<li class="name-row">Markus</li>
+<li class="name-row">Frank</li>
+<li class="name-row">Jürgen</li>
+</ul>
+</div>
+<div class="col">
+<div class="col-title">Doppel 2 (19-21h)</div>
+<ul class="names">
+<li class="name-row">NDR</li>
+<li class="name-row">Niko</li>
+<li class="name-row">Ernst</li>
+<li class="name-row">Simon</li>
+</ul>
+</div>
+<div class="col">
+<div class="col-title">Einzel (20-21h)</div>
+<ul class="names">
+<li class="name-row">Hristo</li>
+<li class="name-row">Serkan</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="card">
+<div class="card-header" onclick="toggleCard(this)"><span class="date" data-ymd="2025-12-31">31-Dez-2025</span><span class="chev">▶</span></div>
+<div class="card-content">
+<div class="columns">
+<div class="col">
+<div class="col-title">Doppel 1 (19-21h)</div>
+<ul class="names">
+<li class="name-row">Hristo</li>
+<li class="name-row">Markus</li>
+<li class="name-row">NDR</li>
+<li class="name-row">Holger E.</li>
+</ul>
+</div>
+<div class="col">
+<div class="col-title">Doppel 2 (19-21h)</div>
+<ul class="names">
+<li class="name-row">Dieter</li>
+<li class="name-row">Dirk</li>
+<li class="name-row">Holger D.</li>
+<li class="name-row">Niko</li>
+</ul>
+</div>
+<div class="col">
+<div class="col-title">Einzel (20-21h)</div>
+<ul class="names">
+<li class="name-row">Frank</li>
+<li class="name-row">Serkan</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<script>
+
+function parseYMD(ymd){ const [y,m,d] = ymd.split('-').map(Number); return new Date(y, m-1, d); }
+function mondayOfWeek(d){ const dt = new Date(d.getFullYear(), d.getMonth(), d.getDate()); const day=(dt.getDay()+6)%7; dt.setDate(dt.getDate()-day); dt.setHours(0,0,0,0); return dt; }
+function sameDay(a,b){ return a.getFullYear()===b.getFullYear() && a.getMonth()===b.getMonth() && a.getDate()===b.getDate(); }
+function closeAll(){ document.querySelectorAll('.card.open').forEach(c=>c.classList.remove('open')); }
+function openCard(card){ closeAll(); card.classList.add('open'); }
+function toggleCard(header){ const card = header.parentElement; if(card.classList.contains('open')) card.classList.remove('open'); else { closeAll(); card.classList.add('open'); } }
+
+// Zoom controls
+const ZOOM_KEY = 'tp_zoom';
+const MIN_ZOOM = 0.8, MAX_ZOOM = 1.8, STEP = 0.1;
+function applyZoom(val){ const z = Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, val)); document.documentElement.style.setProperty('--zoom', z); try{ localStorage.setItem(ZOOM_KEY, String(z)); }catch(e){} const r=document.getElementById('zoomReadout'); if(r) r.textContent = Math.round(z*100)+'%'; }
+function zoomIn(){ const cur = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--zoom')) || 1; applyZoom(cur + STEP); }
+function zoomOut(){ const cur = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--zoom')) || 1; applyZoom(cur - STEP); }
+function zoomReset(){ applyZoom(1); }
+
+document.addEventListener('DOMContentLoaded', ()=>{
+  // restore zoom
+  let stored = 1; try{ stored = parseFloat(localStorage.getItem(ZOOM_KEY)) || 1; }catch(e){}
+  applyZoom(stored);
+
+  // open current week
+  const cards = Array.from(document.querySelectorAll('.card'));
+  const mondayToday = mondayOfWeek(new Date());
+  let target = null;
+  for(const card of cards){
+    const ymd = card.querySelector('.card-header .date').dataset.ymd;
+    const d = parseYMD(ymd);
+    if(sameDay(mondayOfWeek(d), mondayToday)){ target = card; break; }
+  }
+  if(!target){
+    const future = cards.map(c=>({c, d: parseYMD(c.querySelector('.card-header .date').dataset.ymd)})).filter(x=> x.d >= mondayToday).sort((a,b)=> a.d-b.d);
+    if(future.length) target = future[0].c; else {
+      const past = cards.map(c=>({c, d: parseYMD(c.querySelector('.card-header .date').dataset.ymd)})).sort((a,b)=> b.d-a.d);
+      if(past.length) target = past[0].c;
+    }
+  }
+  if(target) openCard(target);
+});
+
+</script>
+</body></html>
